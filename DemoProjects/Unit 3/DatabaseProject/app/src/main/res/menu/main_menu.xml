@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/add_child_option"
+        android:title="Add Child" />
+
+    <item android:id="@+id/add_veggie_option"
+        android:title="Add Vegetable" />
+
+    <item android:id="@+id/add_candy_option"
+        android:title="Add Candy" />
+
+    <item android:id="@+id/remove_child_option"
+        android:title="Remove Child" />
+
+    <item android:id="@+id/remove_veggie_option"
+        android:title="Remove Vegetable" />
+
+    <item android:id="@+id/remove_candy_option"
+        android:title="Remove Candy" />
+
+    <item android:id="@+id/search_option"
+        android:title="Run Queries!"/>
+</menu>

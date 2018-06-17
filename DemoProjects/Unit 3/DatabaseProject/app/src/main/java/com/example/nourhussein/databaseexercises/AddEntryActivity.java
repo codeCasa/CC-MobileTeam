@@ -26,7 +26,6 @@ public class AddEntryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_entry);
 
-        Log.d("DEBUG", "MADE IT HERE");
         Intent intent = getIntent();
         tableName = intent.getStringExtra("type");
         mDatabase = DBManager.getInstance(this);

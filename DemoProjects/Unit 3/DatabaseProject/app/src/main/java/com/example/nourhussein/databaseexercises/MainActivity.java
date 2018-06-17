@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
 //        dbManager.insertCandy("Sour Patch Kids", "Gummy", 115);
 //
 //        dbManager.insertChild("John Doe", 8, "KitKat", "Broccoli");
-//        dbManager.insertChild("Rose Tyler", 19, "Sour Patch Kids", "Carrot");
+//        dbManager.insertChild("Jane Doe", 19, "Sour Patch Kids", "Carrot");
 
 
 

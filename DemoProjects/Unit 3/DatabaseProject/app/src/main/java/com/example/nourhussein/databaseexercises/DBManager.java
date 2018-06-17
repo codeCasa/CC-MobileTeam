@@ -76,7 +76,6 @@ public class DBManager extends SQLiteOpenHelper{
         db.execSQL(SQL_CREATE_VEG_TABLE);
         db.execSQL(SQL_CREATE_KIDS_TABLE);
         db.execSQL(SQL_CREATE_CANDY_TABLE);
-        Log.d("EYYY", "HERE");
     }
 
     @Override //required function, simply deletes the tables and creates new empty versions of them
@@ -85,7 +84,6 @@ public class DBManager extends SQLiteOpenHelper{
         db.execSQL(SQL_DELETE_TABLE_STARTER + DatabaseContract.Candyland.TABLE_NAME);
         db.execSQL(SQL_DELETE_TABLE_STARTER + DatabaseContract.Kiddo.TABLE_NAME);
         onCreate(db);
-
     }
 
     //method to insert into vegetables table, return false if there was an error in inserting teh new value, true otherwise

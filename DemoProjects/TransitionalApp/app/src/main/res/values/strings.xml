@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Match The Cat</string>
+
+    <string name="title_activity_splash_screen">Memory Matcher</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
+    <string name="title_activity_lobby">LobbyActivity</string>
 </resources>

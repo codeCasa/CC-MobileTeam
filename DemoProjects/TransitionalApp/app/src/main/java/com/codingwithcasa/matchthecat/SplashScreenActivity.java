@@ -31,6 +31,7 @@ public class SplashScreenActivity extends Activity {
 
         setContentView(R.layout.activity_splash_screen);
 
+        //Add the application contextr to the cache for later refeerence
         CCCache.addItem("ApplicationContext",getApplicationContext());
         HandlerThread ht = new HandlerThread("AndroidFileLogger.Horse");
         ht.start();

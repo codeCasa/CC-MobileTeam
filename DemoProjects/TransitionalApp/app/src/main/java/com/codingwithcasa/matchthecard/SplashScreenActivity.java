@@ -1,4 +1,4 @@
-package com.codingwithcasa.matchthecat;
+package com.codingwithcasa.matchthecard;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -9,7 +9,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
 
-import com.codingwithcasa.matchthecat.Utils.CCCache;
+import com.codingwithcasa.matchthecard.Utils.CCCache;
 import com.orhanobut.logger.CsvFormatStrategy;
 import com.orhanobut.logger.DiskLogAdapter;
 import com.orhanobut.logger.FormatStrategy;
@@ -31,16 +31,21 @@ public class SplashScreenActivity extends Activity {
 
         setContentView(R.layout.activity_splash_screen);
 
-        //Add the application contextr to the cache for later refeerence
+        //Add the application context to the cache for later reference
+        //This will allow us to do UI or Android specific api calls when not in an activity
         CCCache.addItem("ApplicationContext",getApplicationContext());
         HandlerThread ht = new HandlerThread("AndroidFileLogger.Horse");
         ht.start();
+        //Set up a third party logging mechanism
         FormatStrategy formatStrategy = CsvFormatStrategy.newBuilder()
                 .date(new Date())
                 .dateFormat(new SimpleDateFormat("yyyy.MM.dd HH:mm:ss.SSS", Locale.US))
                 .build();
 
         Logger.addLogAdapter(new DiskLogAdapter(formatStrategy));
+        //Get some the current device's information and log it
+        //This can be useful if a specific OS/Brand/Model experience an issue
+        //that other devices are not
         String model = Build.MODEL;
         if (!model.startsWith(Build.MANUFACTURER))
             model = Build.MANUFACTURER + " " + model;
@@ -53,11 +58,13 @@ public class SplashScreenActivity extends Activity {
         } catch (PackageManager.NameNotFoundException e2) {
         }
         Logger.i("App version: " + (info == null ? "(null)" : info.versionCode));
+
+        //After about 2.5secs we can move to the main screen
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             public void run() {
                 startActivity(new Intent(SplashScreenActivity.this, LobbyActivity.class));
-                finish();
+                finish(); // removes the splash screen from the stack so user can't go back to it
             }
         }, 2500);
     }

@@ -6,6 +6,7 @@ import android.os.Bundle;
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
  * status bar and navigation/system bar) with user interaction.
+ * test
  */
 public class LobbyActivity extends Activity {
     @Override

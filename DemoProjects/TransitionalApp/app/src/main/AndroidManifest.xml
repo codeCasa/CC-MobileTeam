@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.codingwithcasa.matchthecard.SplashScreenActivity"
+            android:name=".SplashScreenActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_splash_screen"
             android:theme="@style/FullscreenTheme">
@@ -21,10 +21,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.codingwithcasa.matchthecard.LobbyActivity"
+            android:name=".LobbyActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_lobby"
-            android:theme="@style/FullscreenTheme"/>
+            android:theme="@style/FullscreenTheme" />
+        <activity android:name=".EasyActivity"></activity>
     </application>
 
 </manifest>

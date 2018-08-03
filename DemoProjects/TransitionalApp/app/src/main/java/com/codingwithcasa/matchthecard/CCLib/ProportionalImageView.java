@@ -8,6 +8,8 @@ import android.widget.ImageView;
 public class ProportionalImageView extends ImageView {
 
     private int mRowCol = 3;
+    private int mImageId;
+    private int mOrginalId;
 
     public ProportionalImageView(Context context) {
         super(context);
@@ -34,5 +36,21 @@ public class ProportionalImageView extends ImageView {
             setMeasuredDimension(w/mRowCol, h/mRowCol);
         }
         else super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+    }
+
+    public void setImageId(int id){
+        mImageId = id;
+    }
+
+    public int getImageId(){
+        return mImageId;
+    }
+
+    public void setOriginalId(int id){
+        mOrginalId = id;
+    }
+
+    public int getOriginalId(){
+        return mOrginalId;
     }
 }

@@ -9,4 +9,7 @@
     <string name="ready">Ready!</string>
     <string name="reset">Reset</string>
     <string name="hit_ready">\"Please tap the ready button first.\"</string>
+    <string name="pick_a_card_to_place_down">Pick a card to place down</string>
+    <string name="win">You win!</string>
+    <string name="keep_going">Keep going, the order still isn\'t right.</string>
 </resources>

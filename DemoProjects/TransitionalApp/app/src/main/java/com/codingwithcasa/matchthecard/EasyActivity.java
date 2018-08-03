@@ -72,21 +72,32 @@ public class EasyActivity extends Activity implements View.OnClickListener{
         }
     }
 
+
+    /**
+     * This method does a lot of the heavy lifting. It sets up the card picker dialog.
+     * It also places the down a card when a cell is selected.
+     */
     private void setupCardPicker(){
+        //Build the card picker dialog
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = this.getLayoutInflater();
         builder.setView(inflater.inflate(R.layout.card_picker, null));
         mDialog = builder.create();
         mDialog.create();
 
+        // We need to get the options from the card picker dialog
         View cardPickerHolder = mDialog.findViewById(R.id.CardImageLinearLayout);
         ArrayList<View> imageChoices = Utils.getAllChildren(cardPickerHolder);
+
+        //This onclick listener is shared for each card cell, and when an item is clicked
+        //we put the picked card in the appropriate cell and check the order
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ProportionalImageView iv = (ProportionalImageView)v;
-                ProportionalImageView clicked = (ProportionalImageView)CCCache.getItem("ClickedCard");
+                ProportionalImageView iv = (ProportionalImageView)v;//the clicked imaged
+                ProportionalImageView clicked = (ProportionalImageView)CCCache.getItem("ClickedCard"); // retreieve the clicked cell from the cache
                 if(clicked == null) return;
+                //places the card down on the grid
                 switch(iv.getId()){
                     case R.id.cat1:
                         clicked.setImageResource(R.drawable.cat1);
@@ -106,14 +117,22 @@ public class EasyActivity extends Activity implements View.OnClickListener{
                         break;
                 }
 
-                mDialog.dismiss();
+                mDialog.dismiss(); //close the dialog
 
                 for (int i = 0; i< mCardFronts.length; i++) {
+                    /*
+                        Because the clicked cell retrieved from the cache is a shallow copy
+                        We must find the original instance and alter it's data, since we use
+                        the original instances to confirm the proper order
+                        Another way would be to completely override the original instance
+                        with the clicked one.
+                     */
                     if(mCardFronts[i].getOriginalId() == clicked.getImageId()){
                         mCardFronts[i].setImageId(clicked.getImageId());
                     }
                 }
 
+                //check the order
                 if(areCardsInOrder()){
                     Toast.makeText(mInstance, R.string.win, Toast.LENGTH_SHORT).show();
                 }else{
@@ -121,29 +140,39 @@ public class EasyActivity extends Activity implements View.OnClickListener{
                 }
             }
         };
+
+        //add the above listener to the dialog option
         for (View v: imageChoices) {
             if(v instanceof ProportionalImageView)
                 v.setOnClickListener(listener);
         }
     }
 
-    //private void setImageId(int oldImageId)
 
+    /**
+     * This method flips the cards over to the front side to show the cats
+     */
     private void flipCardsToFront(){
+        //remove the old cards
         mCardGrid.removeAllViews();
         Random rand = new Random();
         for(int i=0; i<9; i++){
+            //pick a random card
             int catCard = rand.nextInt(mCatCards.length);
             catCard = catCard >= 0 ? catCard : 0;
-            ProportionalImageView image = new ProportionalImageView(this);
+            ProportionalImageView image = new ProportionalImageView(this); // A custom image view to fill the card cell
             image.setImageResource(mCatCards[catCard]);
-            image.setOriginalId(mCatCards[catCard]);
-            mOrder[i]=mCatCards[catCard];
-            mCardGrid.addView(image);
+            image.setOriginalId(mCatCards[catCard]);// need to know the original card image id
+            mOrder[i]=mCatCards[catCard];//need to remember the orignal order
+            mCardGrid.addView(image);// add it to the grid
             mCardFronts[i] = image;
         }
     }
 
+    /**
+     * This method determines if the cards were placed back in the correct order
+     * @return true if the cards are in the correct order
+     */
     private boolean areCardsInOrder(){
         for (int i=0; i<mCardFronts.length; i++) {
             if(mCardFronts[i].getImageId() != mOrder[i])
@@ -202,7 +231,10 @@ public class EasyActivity extends Activity implements View.OnClickListener{
                 }
                 if(mReady.getText().toString().equals(getString(R.string.reset))) {
                     //now we can handle the click logic
+
+                    //add the clicked card to the cache so we can reference it later
                     CCCache.addItem("ClickedCard", v);
+                    //show the card picker dialog
                     mDialog.show();
                 }
                 break;

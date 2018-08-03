@@ -5,6 +5,10 @@ import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
+/**
+ * The following class is an extension of an ImageView
+ * With the exception it fills w/e space it is contained in
+ */
 public class ProportionalImageView extends ImageView {
 
     private int mRowCol = 3;

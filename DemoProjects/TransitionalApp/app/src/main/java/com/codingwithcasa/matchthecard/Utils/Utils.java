@@ -1,31 +1,24 @@
 package com.codingwithcasa.matchthecard.Utils;
-
-import android.app.Activity;
 import android.content.Context;
-import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
-
 import java.util.ArrayList;
 
 public class Utils {
 
-    public static int getScreenHeight(Activity activity){
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        activity.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        return (int)displayMetrics.ydpi;
-    }
-
-    public static int getScreenWidth(Activity activity){
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        activity.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        return (int)displayMetrics.xdpi;
-    }
-
+    /**
+     * Get the application context from the cache
+     * @return
+     */
     public static Context getApplicationContext(){
         return (Context)CCCache.getItem("ApplicationContext");
     }
 
+    /**
+     * Get all the children of a specified view
+     * @param v - The parent view
+     * @return - A list of the view's children
+     */
     public static ArrayList<View> getAllChildren(View v) {
 
         if (!(v instanceof ViewGroup)) {

@@ -6,4 +6,6 @@
     <string name="dummy_content">DUMMY\nCONTENT</string>
 
     <string name="title_activity_lobby">LobbyActivity</string>
+    <string name="ready">Ready!</string>
+    <string name="reset">Reset</string>
 </resources>

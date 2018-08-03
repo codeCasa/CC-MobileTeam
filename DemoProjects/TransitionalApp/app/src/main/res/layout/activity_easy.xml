@@ -6,17 +6,19 @@
     android:layout_height="match_parent"
     tools:context="com.codingwithcasa.matchthecard.EasyActivity">
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical">
         <GridLayout
             android:id="@+id/CardGrid"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:columnCount="3"
-            android:rowCount="3"></GridLayout>
+            android:rowCount="3"
+            android:orientation="vertical" />
         <Button
             android:id="@+id/ReadyBtn"
+            android:layout_gravity="bottom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/ready"

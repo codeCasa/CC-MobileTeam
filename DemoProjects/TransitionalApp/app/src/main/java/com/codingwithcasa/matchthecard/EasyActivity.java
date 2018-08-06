@@ -5,6 +5,8 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.SystemClock;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -40,6 +42,10 @@ public class EasyActivity extends Activity implements View.OnClickListener{
             R.drawable.cat4,
     };
     private final int[] mOrder = new int[9];
+
+    private double timeElapsed = 0; //tracks the amount of time it takes the user to finish the game
+    private int movesMade = 0; // tracks the number of guesses the user makes before winning the game
+    private long startTime, endTime; //variables to measure elapsed time
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -135,6 +141,10 @@ public class EasyActivity extends Activity implements View.OnClickListener{
                 //check the order
                 if(areCardsInOrder()){
                     Toast.makeText(mInstance, R.string.win, Toast.LENGTH_SHORT).show();
+                    endTime = SystemClock.elapsedRealtime();
+                    timeElapsed = (endTime - startTime)/1000;
+                    //TODO: check if high score in terms of moves or time and add to database
+
                 }else{
                     Toast.makeText(mInstance, R.string.keep_going, Toast.LENGTH_SHORT).show();
                 }
@@ -204,6 +214,7 @@ public class EasyActivity extends Activity implements View.OnClickListener{
                                     }
                                 });
                                 mCountDownTimer.cancel();
+                                startTime = SystemClock.elapsedRealtime();
                             }else {
                                 //Since the timer runs on a different thread we must access
                                 //UI elements on the UI thread
@@ -221,6 +232,7 @@ public class EasyActivity extends Activity implements View.OnClickListener{
                     mReady.setText(R.string.ready);
                     mReadyTime = 30;
                     mCountDownTimer = new Timer();
+                    movesMade = 0;
                 }
                 break;
             default: // hit a card back
@@ -236,6 +248,10 @@ public class EasyActivity extends Activity implements View.OnClickListener{
                     CCCache.addItem("ClickedCard", v);
                     //show the card picker dialog
                     mDialog.show();
+
+                    //increment the number of moves made by the user so far by 1
+                    movesMade++;
+                    Log.d("clicks now at", ""+movesMade);
                 }
                 break;
         }
